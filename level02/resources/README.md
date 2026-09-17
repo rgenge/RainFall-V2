@@ -1,4 +1,3 @@
-````markdown
 # Rainfall — Level 2: Off-By-One / Stack Pivot (`dixie`)
 
 **Target:** `dixie` — SUID `flag02` binary, x86-64 Linux
@@ -360,4 +359,3 @@ execute shellcode in argv[0] string      NX / W^X                      → data 
 keep euid via sh -p                      no SUID / drop privs early    → nothing to steal
 read the flag                            file permissions (.pass)      → last line of defense
 ```
-````
