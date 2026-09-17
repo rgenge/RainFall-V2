@@ -232,11 +232,10 @@ Additional rules this function violates:
 - **Magic constants are not authentication.** `0xdeadbeef` is visible to
   anyone with `objdump`. A comparison inside the binary is not access
   control — the binary and all its bytes belong to the attacker.
-- **A SUID binary should never spawn an interactive shell.** Privileged
-  helpers should do one audited operation and drop privileges immediately
-  (`seteuid(getuid())` before touching user input). The `setreuid(geteuid(),
-  geteuid())` + `execl("/bin/sh")` pair is precisely the sequence that must
-  not exist in such a program.
+- **A SUID binary should never spawn an interactive shell.** A privileged
+  helper should perform one audited operation and return. The
+  `setreuid(geteuid(), geteuid())` + `execl("/bin/sh")` pair is precisely
+  the sequence that must not exist in such a program.
 
 ### 9.3 Compiler hardening
 

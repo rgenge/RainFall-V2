@@ -180,14 +180,15 @@ credentials[strcspn(credentials, "\n")] = '\0';   // strip trailing newline
 `fgets` stops at `sizeof(credentials)-1` bytes — an overflow becomes
 *impossible by construction*, regardless of compiler or OS protections.
 
-`gets()` is so dangerous it was **removed from the C11 standard**; modern
-glibc refuses to link programs that use it. GCC even warns at compile time:
+`gets()` is so dangerous it was **removed from the C11 standard**, but glibc
+retains the symbol for compatibility. The quoted diagnostic is a linker warning
+emitted at link time:
 
 ```
 warning: the `gets' function is dangerous and should never be used.
 ```
 
-Listen to your compiler.
+Take the linker's warning seriously.
 
 ### 8.2 Compiler hardening
 
@@ -229,19 +230,14 @@ overwrite 88 bytes up the stack    stack canary              → detected, abort
 execute shellcode on stack         NX                        → data can't run
 hardcoded stack address            ASLR                      → address is garbage
 ret2libc fallback (next levels)    PIE + Full RELRO          → gadgets & GOT move
-spawn privileged shell             drop euid early / no SUID → nothing to escalate
+spawn privileged shell             no SUID                   → nothing to escalate
 read the flag                      file permissions          → last line of defense
 ```
 
 The `sh -p` trick also deserves a defense note: SUID programs that hand the
-user an interactive shell are almost always a design flaw. The safe patterns
-are **privilege separation** (a tiny SUID helper that performs one audited
-operation and immediately drops euid back) or dropping privileges before any
-user-controlled input is processed:
-
-```c
-seteuid(getuid());   /* do this BEFORE reading user input */
-```
+user an interactive shell are almost always a design flaw. Prefer
+**privilege separation**: a tiny SUID helper should perform one audited
+operation and return.
 
 ### 8.4 The takeaway
 
