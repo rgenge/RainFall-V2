@@ -76,6 +76,15 @@ cat /proc/sys/kernel/randomize_va_space   # must be 0 (ASLR off)
 echo "AAAA" > /tmp/dummy
 gdb -q ./case
 ```
+
+If GDB reports `Permission denied: '/opt/pwndbg/.venv/uv.lock.hash'` during startup, retry with:
+
+```bash
+gdb -nx -q ./case
+```
+
+`-nx` skips GDB initialization files, so pwndbg does not start and trigger the permission error. **Level 02 example:** `gdb -nx -q ./dixie`.
+
 ```
 (gdb) set exec-wrapper env -i     # make gdb's environment match `env -i ./case`
 (gdb) break *0x40159b             # first instruction AFTER gets returns

@@ -166,6 +166,15 @@ into an address baked into the binary at link time. `0x401292` is identical
 on every run of this binary regardless of system randomization. The entire
 attack is a redirect of control flow to existing, legitimate, privileged code.
 
+For optional GDB inspection, if startup reports
+`Permission denied: '/opt/pwndbg/.venv/uv.lock.hash'`, use:
+
+```bash
+gdb -nx -q ./ono
+```
+
+`-nx` skips GDB initialization files, so pwndbg does not start and trigger the permission error. **Level 02 example:** `gdb -nx -q ./dixie`.
+
 ## 8. Attack chain summary
 
 ```
