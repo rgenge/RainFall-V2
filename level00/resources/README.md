@@ -1,4 +1,3 @@
-````markdown
 # Rainfall — Level 0: Stack Buffer Overflow (`case`)
 
 **Target:** `case` — SUID `flag00` binary, x86-64 Linux
