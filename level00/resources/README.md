@@ -250,6 +250,3 @@ No single measure above is "the" defense. Each one, alone, would have broken
 make exploitation impossible — they make it **expensive**, forcing the
 attacker from a one-shot overflow to multi-stage techniques: leaking the
 canary, leaking libc addresses, building ROP chains.
-
-Which is exactly what the next levels do, one removed protection at a time.
-````
