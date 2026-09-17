@@ -253,8 +253,3 @@ canary, leaking libc addresses, building ROP chains.
 
 Which is exactly what the next levels do, one removed protection at a time.
 ````
-
-Two small notes outside the document:
-
-1. **Save it now, while it's fresh** — you said yourself you'd already lost track of what worked. That's the exact failure mode writeups prevent.
-2. Notice how section 8.4 doubles as a preview of the whole project: every level is essentially "one defense got switched on, adapt the chain." When you hit level 1 and NX kills your sled, you'll be living the row you just documented.
